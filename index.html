@@ -6,10 +6,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Recipe Finder</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-utensils"></i> Savory</h1>
+            <p>Discover delicious recipes for any occasions</p>
+        </div>
+    </header>
 
+    <main class="container">
+        <section class="search-section">
+            <div class="search-box">
+                <input type="text" id="search-input" class="search-input" 
+                placeholder="Search for recipes (e.g. Chicken, Pasta, Vegan) ...">
+                <button id="search-button"><i class="fas fa-search"></i> Search</button>
+            </div>
+            <div class="filters">
+                <select id="meal-type">
+                    <option value="">Any meal type</option>
+                    <option value="Breakfast">Breakfast</option>
+                    <option value="Lunch">Lunch</option>
+                    <option value="Dinner">Dinner</option>
+                    <option value="Snack">Snack</option>
+                    <option value="Teatime">Teatime</option>
+                </select>
+                <select id="diet-type">
+                    <option value="">Any Diet</option>
+                    <option value="balanced">Balanced</option>
+                    <option value="high-protein">High-Protein</option>
+                    <option value="low-carb">Low Carb</option>
+                    <option value="low-fat">Low-Fat</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="vegetarian">Vegetarian</option>
+                </select>
+                <select id="cuisine-type">
+                    <option value="">Any Cuisine</option>
+                    <option value="American">American</option>
+                    <option value="Asian">Asian</option>
+                    <option value="British">British</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Indian">Indian</option>
+                    <option value="French">French</option>
+                    <option value="Italian">Italian</option>
+                    <option value="Mexican">Mexican</option>
+                    <option value="Middle Eastern">Meddile Eastern</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="results-section">
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Searching for delicious recipes...</p>
+            </div>
+        </section>
+    </main>
 
     <script src="scripts/app.js"></script>
 </body>
