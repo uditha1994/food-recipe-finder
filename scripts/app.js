@@ -64,13 +64,13 @@ async function searchRecipes() {
     }
 }
 
-function getIngredientsList(meal) { 
+function getIngredientsList(meal) {
     const ingredients = [];
 
-    for(let i= 1; i <= 20; i++){
-        const ingredient  = meal[`strIngredient${i}`];
+    for (let i = 1; i <= 20; i++) {
+        const ingredient = meal[`strIngredient${i}`];
         const measure = meal[`strMeasure${i}`];
-        if(ingredient && ingredient.trim() !== ''){
+        if (ingredient && ingredient.trim() !== '') {
             ingredients.push(`${measure} ${ingredient}`.trim());
         }
     }
@@ -78,7 +78,48 @@ function getIngredientsList(meal) {
     return ingredients;
 }
 
-function displayResults(recipes) { }
+function displayResults(recipes) {
+    hideLoading();
+    hideError();
+    resultsContainer.innerHTML = '';
+
+    if (!recipes || recipes.length === 0) {
+        noResultsElement.style.display = 'block';
+        return;
+    }
+
+    noResultsElement.style.display = 'none'
+
+    recipes.forEach(recipeData => {
+        const recipe = recipeData.recipe;
+
+        const recipeCard = document.createElement('div');
+        recipeCard.className = 'recipe-card';
+
+        recipeCard.innerHTML = `
+            <img src="${recipe.image || 'https://via.placeholder.com/300x200?text=No+Image'}"
+              class="recipe-image" alt="${recipe.label}">
+            <div class="recipe-content">
+                <h3 class="recipe-title">${recipe.label}</h3>
+                <div class="recipe-details">
+                    <span><i class="fas fa-clock"></i> ${recipe.totalTime || 'N/A'} min</span>
+                    <span><i class="fas fa-chart-pie"></i> ${recipe.calories || 'N/A'} calories</span>
+                </div>
+                <div class="recipe-ingredients">
+                    <h4>Key Ingredients: </h4>
+                    <ul>
+                        ${(recipe.ingredientLines || []).slice(0, 5).map
+                (ingredient => `<li>${ingredient}</li>`).join('')}
+                    </ul>
+                </div>
+                <a href="${recipe.url || '#'}" target="_blank" class="view-recipe">
+                View Full Recipe</a>
+            </div>
+        `;
+
+        resultsContainer.appendChild(recipeCard);
+    })
+}
 
 function showLoading() {
     loadingElement.style.display = 'flex';
